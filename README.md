@@ -51,7 +51,7 @@ After all predictions finish, we should merge all the predictions into the whole
 cat /path/to/prediction_output/* > /path/to/pseudo_labels/raw/train.target
 ```
 
-## Layer Reordering
+## Reordering Layers
 To choose some specified layers like the 1st, 6th, 11th layer, we first reorder the specified layer weights to the first several layers with the script `layer_reorder.py`. For example, we want to use the 1st, 6th, 11th layer, we reorder these three layers' weights to the first three layers, i.e., 0th, 1st, 2nd layer.
 ```bash
 python layer_reorder.py --orig_ckpt /path/to/Model/bart.large/model.pt --out_ckpt /path/to/Model/bart.large/model_0-6-11.pt --encoder-layers-to-keep 0,1,2,3,4,5,6,7,8,9,10,11 --decoder-layers-to-keep 0,6,11
