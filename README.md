@@ -1,9 +1,11 @@
+This code repository is for the paper [_Attention Temperature Matters in Abstractive Summarization Distillation_](https://arxiv.org/abs/2106.03441).
+
 # Environment Setup
 ## Requirements and Installation
 * python verison >= 3.6
 * pytorch version >= 1.5.0
 * fairseq version == 0.9.0
-* files2rouge 
+* [files2rouge](https://github.com/pltrdy/files2rouge)
 * java version >= 11.0.11
 
 

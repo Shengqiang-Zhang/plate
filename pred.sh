@@ -181,10 +181,3 @@ for ckpt_id in $(echo $ckpt_list | tr ";" "\n"); do
         fi
     done
 done
-
-# cat checkpoints/${pred_result} | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > checkpoints/${pred_tokenize_result}
-# # cat $DATA_PATH/cnn_dm/test.target | java edu.stanford.nlp.process.PTBTokenizer -ioFileList -preserveLines > $DATA_PATH/cnn_dm/test.hypo.target
-# files2rouge checkpoints/${pred_tokenize_result} $DATA_PATH/cnn_dm/test.hypo.target
-# rouge -f checkpoints/${pred_tokenize_result} $DATA_PATH/cnn_dm/test.hypo.target --avg
-
-# -----Not tokenize-----
