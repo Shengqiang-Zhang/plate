@@ -87,11 +87,9 @@ def pred_ckpt(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", type=str)
-    parser.add_argument("--ckpt_id", type=str)
-    parser.add_argument("--ckpt_file", type=str)
+    parser.add_argument("--ckpt_path", type=str)
     parser.add_argument("--test_file", type=str)
     parser.add_argument("--output_file", type=str)
-    parser.add_argument("--data_dir", type=str)
     parser.add_argument("--retain_dropout", type=str)
     parser.add_argument("--inference_params", type=str)
     parser.add_argument("--load_ckpt_data", type=str)
