@@ -19,7 +19,7 @@ from .lightweight_convolution import LightweightConv, LightweightConv1dTBC
 from .linearized_convolution import LinearizedConvolution
 from .logsumexp_moe import LogSumExpMoE
 from .mean_pool_gating_network import MeanPoolGatingNetwork
-from .multihead_attention import MultiheadAttention, DecoderMultiheadAttention, CrossMultiheadAttention
+from .multihead_attention import MultiheadAttention
 from .positional_embedding import PositionalEmbedding
 from .scalar_bias import ScalarBias
 from .sinusoidal_positional_embedding import SinusoidalPositionalEmbedding
@@ -50,8 +50,6 @@ __all__ = [
     'LogSumExpMoE',
     'MeanPoolGatingNetwork',
     'MultiheadAttention',
-    'DecoderMultiheadAttention',
-    "CrossMultiheadAttention",
     'PositionalEmbedding',
     'ScalarBias',
     'SinusoidalPositionalEmbedding',

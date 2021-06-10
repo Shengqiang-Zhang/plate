@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from fairseq import utils
-from fairseq.modules import LayerNorm, MultiheadAttention, DecoderMultiheadAttention, CrossMultiheadAttention
+from fairseq.modules import LayerNorm, MultiheadAttention
 
 
 class TransformerEncoderLayer(nn.Module):
@@ -30,7 +30,8 @@ class TransformerEncoderLayer(nn.Module):
         self.embed_dim = args.encoder_embed_dim
         self.self_attn = MultiheadAttention(
             self.embed_dim, args.encoder_attention_heads,
-            dropout=args.attention_dropout, self_attention=True
+            dropout=args.attention_dropout, self_attention=True,
+            attn_temperature=args.encoder_attn_temp
         )
         self.self_attn_layer_norm = LayerNorm(self.embed_dim)
         self.dropout = args.dropout
@@ -136,13 +137,14 @@ class TransformerDecoderLayer(nn.Module):
         super().__init__()
         self.embed_dim = args.decoder_embed_dim
         self.cross_self_attention = getattr(args, 'cross_self_attention', False)
-        self.self_attn = DecoderMultiheadAttention(
+        self.self_attn = MultiheadAttention(
             embed_dim=self.embed_dim,
             num_heads=args.decoder_attention_heads,
             dropout=args.attention_dropout,
             add_bias_kv=add_bias_kv,
             add_zero_attn=add_zero_attn,
             self_attention=not self.cross_self_attention,
+            attn_temperature=args.decoder_attn_temp
         )
         self.dropout = args.dropout
         self.activation_fn = utils.get_activation_fn(
@@ -164,13 +166,14 @@ class TransformerDecoderLayer(nn.Module):
             self.encoder_attn = None
             self.encoder_attn_layer_norm = None
         else:
-            self.encoder_attn = CrossMultiheadAttention(
+            self.encoder_attn = MultiheadAttention(
                 self.embed_dim,
                 args.decoder_attention_heads,
                 kdim=getattr(args, 'encoder_embed_dim', None),
                 vdim=getattr(args, 'encoder_embed_dim', None),
                 dropout=args.attention_dropout,
                 encoder_decoder_attention=True,
+                attn_temperature=args.cross_attn_temp
             )
             self.encoder_attn_layer_norm = LayerNorm(self.embed_dim, export=export)
 

@@ -173,6 +173,12 @@ class TransformerModel(FairseqEncoderDecoderModel):
                             help='add layernorm to embedding')
         parser.add_argument('--no-scale-embedding', action='store_true',
                             help='if True, dont scale embeddings')
+        parser.add_argument('--encoder-attn-temp', type=int, default=None,
+                            help='the attention temperature of the transformer encoder')
+        parser.add_argument('--decoder-attn-temp', type=int, default=None,
+                            help='the attention temperature of the transformer decoder')
+        parser.add_argument('--cross-attn-temp', type=int, default=None,
+                            help='the attention temperature of the transformer cross attention')
         # fmt: on
 
     @classmethod
@@ -603,21 +609,6 @@ class TransformerDecoder(FairseqIncrementalDecoder):
         if not features_only:
             x = self.output_layer(x)
 
-        # attention_file.write("x.shape: " + str(x.shape) + "\n")
-        # x_cpu = torch.squeeze(x, 1).cpu()
-        # np.savetxt(attention_file, x_cpu.detach().numpy())
-        # for k, v in extra.items():
-        #     attention_file.write(k + "\n")
-        #     if type(v) == list:
-        #         for i in v:
-        #             attention_file.write("v.i.shape: " + str(i.shape) + "\n")
-        #             i_cpu = torch.squeeze(i, 0).cpu()
-        #             np.savetxt(attention_file, i_cpu.detach().numpy())
-        #     else:
-        #         attention_file.write("v.shape: " + str(v.shape) + "\n")
-        #         v_cpu = torch.squeeze(v, 1).cpu()
-        #         np.savetxt(attention_file, v_cpu.detach().numpy())
-        # attention_file.write("\n")
         return x, extra
 
     def extract_features(

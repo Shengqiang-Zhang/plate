@@ -16,7 +16,7 @@ We follow the preprocesssing process(bpe process and binarize process) as shown 
 # Training and Inference
 
 ## Fine-tuning the teacher model
-We didn't make any changes to the code of the training process. So you can use the `fairseq-train` command as the [instruction in fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md) to fine-tune the teacher model.
+We didn't make any changes to the code of the training process. So you can use the `fairseq-train` command or `python train.py` command as the [instruction in fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md) to fine-tune the teacher model.
 
 ```bash
 TOTAL_NUM_UPDATES=20000  
@@ -26,7 +26,7 @@ MAX_TOKENS=2048
 UPDATE_FREQ=4
 BART_PATH=/path/to/bart/model.pt
 
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train.py cnn_dm-bin \
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python fairseq_src/train.py /path/to/x_dataset/bin/ \
     --restore-file $BART_PATH \
     --max-tokens $MAX_TOKENS \
     --task translation \

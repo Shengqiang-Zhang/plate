@@ -30,6 +30,7 @@ aml_path = "../../"
 
 def pred_ckpt(
         test_file, output_file, ckpt_path, ckpt_file, batch_size, load_ckpt_data,
+        encoder_attn_temp, decoder_attn_temp, cross_attn_temp,
         **eval_kwargs,
         # beam, lenpen, max_len_b, min_len, no_repeat_ngram_size
 ):
@@ -38,7 +39,10 @@ def pred_ckpt(
     bart = BARTModel.from_pretrained(
         ckpt_path,
         checkpoint_file=ckpt_file,
-        data_name_or_path=load_ckpt_data
+        data_name_or_path=load_ckpt_data,
+        encoder_attn_temp=encoder_attn_temp,
+        decoder_attn_temp=decoder_attn_temp,
+        cross_attn_temp=cross_attn_temp
     )
     print("-----Inference kwargs:", eval_kwargs)
 
@@ -91,6 +95,9 @@ if __name__ == "__main__":
     parser.add_argument("--retain_dropout", type=str)
     parser.add_argument("--inference_params", type=str)
     parser.add_argument("--load_ckpt_data", type=str)
+    parser.add_argument("--encoder_attn_temp", type=int, default=None)
+    parser.add_argument("--decoder_attn_temp", type=int, default=None)
+    parser.add_argument("--cross_attn_temp", type=int, default=None)
     args = parser.parse_args()
 
     if args.inference_params:
@@ -118,7 +125,7 @@ if __name__ == "__main__":
 
     if Path(args.output_file).exists():
         warnings.warn("The output file will be covered", UserWarning)
-
+    
     bs = 16
     print("----- Inference with", args.ckpt_id, args.ckpt_file, "batch size:", bs)
     print("----- Inference with", args.test_file, "will saved as", args.output_file)
@@ -126,6 +133,7 @@ if __name__ == "__main__":
 
     pred_ckpt(
         args.test_file, args.output_file, args.ckpt_id, args.ckpt_file, bs, args.load_ckpt_data,
+        args.encoder_attn_temp, args.decoder_attn_temp, args.cross_attn_temp,
         **EVAL_KWARGS
     )
 
