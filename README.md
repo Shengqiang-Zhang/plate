@@ -10,13 +10,44 @@ This code repository is for the paper [_Attention Temperature Matters in Abstrac
 
 
 # Data preprocessing
-We follow the preprocesssing process(bpe process and binarize process) as shown in the [instruction in the fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md). 
+We follow the preprocesssing process(bpe process and binarize process) as shown in the [instruction in the fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md). We also provide an out-of-the-box preprocessing script `preprocess.sh`. You just need to change the data path `raw_data_dir` and `bin_data_dir` to your own path.
 
 
 # Training and Inference
 
 ## Fine-tuning the teacher model
 We didn't make any changes to the code of the training process. So you can use the `fairseq-train` command as the [instruction in fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md) to fine-tune the teacher model.
+
+```bash
+TOTAL_NUM_UPDATES=20000  
+WARMUP_UPDATES=500      
+LR=3e-05
+MAX_TOKENS=2048
+UPDATE_FREQ=4
+BART_PATH=/path/to/bart/model.pt
+
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train.py cnn_dm-bin \
+    --restore-file $BART_PATH \
+    --max-tokens $MAX_TOKENS \
+    --task translation \
+    --source-lang source --target-lang target \
+    --truncate-source \
+    --layernorm-embedding \
+    --share-all-embeddings \
+    --share-decoder-input-output-embed \
+    --reset-optimizer --reset-dataloader --reset-meters \
+    --required-batch-size-multiple 1 \
+    --arch bart_large \
+    --criterion label_smoothed_cross_entropy \
+    --label-smoothing 0.1 \
+    --dropout 0.1 --attention-dropout 0.1 \
+    --weight-decay 0.01 --optimizer adam --adam-betas "(0.9, 0.999)" --adam-eps 1e-08 \
+    --clip-norm 0.1 \
+    --lr-scheduler polynomial_decay --lr $LR --total-num-update $TOTAL_NUM_UPDATES --warmup-updates $WARMUP_UPDATES \
+    --fp16 --update-freq $UPDATE_FREQ \
+    --skip-invalid-size-inputs-valid-test \
+    --find-unused-parameters;
+```
 
 ## Generating pseudo labels
 To change the attention temperature to a higher value, we should change the following line (line 13) in the file `fairseq_src/fairseq/modules/multihead_attention.py`
