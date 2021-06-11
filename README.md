@@ -52,11 +52,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python fairseq_src/train.py /path/to/x_data
 ## Generating pseudo labels
 The script `pred.py` is for predicting on single file. We can change the argument value `args.encoder_attn_temp`, `args.decoder_attn_temp`, and `args.cross_attn_temp` in `pred.py` file to change the attention temperature during the teacher's inference process.
 
-If we want to use a temperature value sampled from a uniform distribution U[64, 128], we can set:
-```python
-args.encoder_attn_temp = -64 * torch.rand(1).cuda() + 128
-```
-We can use the same method to change the decoder attention temperature and cross attention temperature.
+If we want to use a temperature value sampled from a uniform distribution U[64, 128], we can set `args.encoder_attn_temp = -1`.
 
 We then generate pseudo labels with the teacher that has higher attention temperature.
 We provide the `pred.py` to predict on the input file. You can use a separate virtual environment in which the fairseq is not installed to ensure that the dependencies called from the `pred.py` are all under the source directory `fairseq_src`. 

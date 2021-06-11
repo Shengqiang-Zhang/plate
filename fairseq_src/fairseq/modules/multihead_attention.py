@@ -41,9 +41,13 @@ class MultiheadAttention(nn.Module):
         self.head_dim = embed_dim // num_heads
         assert self.head_dim * num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
         self.scaling = self.head_dim ** -0.5
-        if attn_temperature:
+        if attn_temperature >= 0:
             print('orig attn scale sqrt({}) to new attn scale sqrt({})'.format(self.head_dim, attn_temperature))
             self.scaling = attn_temperature ** -0.5
+        elif attn_temperature == -1:
+            random_temperature = -64 * torch.rand(1).cuda() + 128
+            print('orig attn scale sqrt({}) to new random attn scale sqrt({})'.format(self.head_dim, random_temperature))
+            self.scaling = random_temperature ** -0.5
 
 
         self.self_attention = self_attention
