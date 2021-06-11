@@ -10,7 +10,7 @@ This code repository is for the paper [_Attention Temperature Matters in Abstrac
 
 
 # Data preprocessing
-We follow the preprocesssing process(bpe process and binarize process) as shown in the [instruction in the fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md). We also provide an out-of-the-box preprocessing script `run_preprocess.sh`. You just need to change the data path `raw_data_dir` and `bin_data_dir` to your own path.
+We follow the preprocesssing process(bpe process and binarize process) as shown in the [instruction in the fairseq toolkit](https://github.com/pytorch/fairseq/blob/v0.9.0/examples/bart/README.cnn.md). We also provide an out-of-the-box preprocessing script `run_preprocessing.sh`. You just need to change the data path `raw_data_dir` and `bin_data_dir` to your own path.
 
 
 # Training and Inference
