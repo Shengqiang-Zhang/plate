@@ -92,6 +92,7 @@ if __name__ == "__main__":
     parser.add_argument("--output_file", type=str)
     parser.add_argument("--retain_dropout", type=str)
     parser.add_argument("--inference_params", type=str)
+    parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--load_ckpt_data", type=str)
     parser.add_argument("--encoder_attn_temp", type=int, default=None)
     parser.add_argument("--decoder_attn_temp", type=int, default=None)
@@ -124,7 +125,7 @@ if __name__ == "__main__":
     if Path(args.output_file).exists():
         warnings.warn("The output file will be covered", UserWarning)
     
-    bs = 16
+    bs = args.batch_size
     print("----- Inference with", args.ckpt_dir, args.ckpt_file, "batch size:", bs)
     print("----- Inference with", args.test_file, "will saved as", args.output_file)
     print("----- Inference with loaded ckpt data", args.load_ckpt_data)
