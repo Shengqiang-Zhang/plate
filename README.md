@@ -49,8 +49,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python fairseq_src/train.py /path/to/x_data
     --find-unused-parameters;
 ```
 ## Prediction
-The script `pred.py` is for predicting on single file. We provide the `run_prediction.sh` script.
- 
+The script `pred.py` is for predicting on single file. We provide the `run_prediction.sh` script for the prediction convenience.
+
 ## Generating pseudo labels
 We can change the argument value `args.encoder_attn_temp`, `args.decoder_attn_temp`, and `args.cross_attn_temp` in `pred.py` file to change the attention temperature during the teacher's inference process.
 
