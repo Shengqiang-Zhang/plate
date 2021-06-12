@@ -86,7 +86,8 @@ def pred_ckpt(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ckpt_path", type=str)
+    parser.add_argument("--ckpt_dir", type=str)
+    parser.add_argument("--ckpt_file", type=str)
     parser.add_argument("--test_file", type=str)
     parser.add_argument("--output_file", type=str)
     parser.add_argument("--retain_dropout", type=str)
@@ -129,7 +130,7 @@ if __name__ == "__main__":
     print("----- Inference with loaded ckpt data", args.load_ckpt_data)
 
     pred_ckpt(
-        args.test_file, args.output_file, args.ckpt_id, args.ckpt_file, bs, args.load_ckpt_data,
+        args.test_file, args.output_file, args.ckpt_dir, args.ckpt_file, bs, args.load_ckpt_data,
         args.encoder_attn_temp, args.decoder_attn_temp, args.cross_attn_temp,
         **EVAL_KWARGS
     )
