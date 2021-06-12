@@ -125,7 +125,7 @@ if __name__ == "__main__":
         warnings.warn("The output file will be covered", UserWarning)
     
     bs = 16
-    print("----- Inference with", args.ckpt_path, "batch size:", bs)
+    print("----- Inference with", args.ckpt_dir, args.ckpt_file, "batch size:", bs)
     print("----- Inference with", args.test_file, "will saved as", args.output_file)
     print("----- Inference with loaded ckpt data", args.load_ckpt_data)
 
