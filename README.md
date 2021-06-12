@@ -48,9 +48,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python fairseq_src/train.py /path/to/x_data
     --skip-invalid-size-inputs-valid-test \
     --find-unused-parameters;
 ```
-
+## Prediction
+The script `pred.py` is for predicting on single file. We provide the `run_prediction.sh` script.
+ 
 ## Generating pseudo labels
-The script `pred.py` is for predicting on single file. We can change the argument value `args.encoder_attn_temp`, `args.decoder_attn_temp`, and `args.cross_attn_temp` in `pred.py` file to change the attention temperature during the teacher's inference process.
+We can change the argument value `args.encoder_attn_temp`, `args.decoder_attn_temp`, and `args.cross_attn_temp` in `pred.py` file to change the attention temperature during the teacher's inference process.
 
 If we want to use a temperature value sampled from a uniform distribution U[64, 128], we can set `args.encoder_attn_temp = -1`, as well as `args.decoder_attn_temp` and `args.cross_attn_temp`.
 

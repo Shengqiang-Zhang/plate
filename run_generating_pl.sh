@@ -1,7 +1,6 @@
 # Split the train.source to run prediction simultaneously
 split -l 10000 /path/to/x_dataset/train.source -d -a 3 /path/to/x_dataset/train_split/train.source
 
-DATASET=cnndm_fullstops
 CKPT_DIR=/path/to/ckpt_dir/
 CKPT_FILE=model.pt
 TEST_FILE=/path/to/x_dataset/raw/test.source
