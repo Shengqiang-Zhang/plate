@@ -20,14 +20,6 @@ import warnings
 aml_path = "../../"
 
 
-# test_file = "test.wd128.article"
-# ckpt_list = ["38e294e6-5a15-463e-9938-6a373b501468", "7398cbfe-01b3-4757-9b2f-44f2e8e5456a", "8bb38500-6d41-448c-abf9-f60bb3cd3470", "c2c45842-08c1-451a-901b-b7ac344f59bc"]
-# ckpt_list = ["38e294e6-5a15-463e-9938-6a373b501468"]
-
-
-# checkpoint_path = aml_path + "aml-code/9a65f8e5-de6e-41f5-bddc-3a8a525cd4a8/checkpoints/"
-# ckpt_path = aml_path + "aml-code/38e294e6-5a15-463e-9938-6a373b501468/checkpoints/" # teacher, ufq=4
-
 def pred_ckpt(
         test_file, output_file, ckpt_path, ckpt_file, batch_size, load_ckpt_data,
         encoder_attn_temp, decoder_attn_temp, cross_attn_temp,
