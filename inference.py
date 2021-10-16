@@ -6,8 +6,6 @@ import os
 import argparse
 print("current path:", os.getcwd())
 
-# aml_path = "/home/v-shezhang/blobs/readindl/shengqiang/"
-# checkpoint_path = aml_path + "aml-code/9a65f8e5-de6e-41f5-bddc-3a8a525cd4a8/checkpoints/"
 checkpoint_path = "./checkpoints/"
 
 parser = argparse.ArgumentParser()
