@@ -1,4 +1,4 @@
-This code repository is for the paper [_Attention Temperature Matters in Abstractive Summarization Distillation_](https://arxiv.org/abs/2106.03441).
+This code repository is for the paper [_Attention Temperature Matters in Abstractive Summarization Distillation_](https://arxiv.org/abs/2106.03441) (ACL 2022).
 
 # Environment Setup
 ## Requirements and Installation
