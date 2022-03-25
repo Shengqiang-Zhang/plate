@@ -83,7 +83,7 @@ bash finetune_multigpus.sh /path/to/nyt_dataset/ /path/to/pretrained_bart/model.
 
 
 # Evaluation
-We tokenize the prediction with the standford-corenlp toolkit, then use the files2rouge to evaluate.
+We tokenize the prediction with the stanford-corenlp toolkit, then use the files2rouge to evaluate.
 For the CNNDM and XSum dataset, we follow the standard full-length F1 based ROUGE.
 ```bash
 export CLASSPATH=/path/to/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
